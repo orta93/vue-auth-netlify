@@ -1,29 +1,90 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import DefaultLayout from '../layouts/DefaultLayout.vue'; 
+import { auth } from '@/firebase/init';
 
-Vue.use(VueRouter)
+import HomeView from '@/views/HomeView.vue';
+import Registro from '../views/Registro.vue';
+import Login from '../views/Login.vue';
+import Perfil from '@/views/Perfil.vue';
+
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    component: DefaultLayout,
+    children: [
+      {
+        path: '', 
+        name: 'Home',
+        component: HomeView
+      },
+      {
+        path: '/registro', 
+        name: 'Registro',
+        component: Registro
+      },
+      {
+        path: '/login',
+        name: 'Login',
+        component: Login
+      },
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/perfil',
+    component: DefaultLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '/perfil',
+        name: 'Perfil',
+        component: Perfil
+      },
+    ]
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+let authInitialized = false;
+auth.onAuthStateChanged(() => {
+    if (!authInitialized) {
+        authInitialized = true;
+        // 🚨 CAMBIO CLAVE: Asegúrate de que el router solo empuje si es necesario,
+        // pero que no bloquee la carga inicial de la página raíz.
+        if (router.currentRoute.fullPath !== '/') {
+           router.push(router.currentRoute.fullPath);
+        }
+    }
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const user = auth.currentUser; 
+
+  if (!authInitialized) {
+    if (!to.matched.some(record => record.meta.requiresAuth)) {
+      return next(); 
+    }
+      
+    return next(false);
+  }
+
+  if (requiresAuth && !user) {
+    // No logeado y ruta protegida
+    next('/login');
+  } else if (!requiresAuth && user && (to.path === '/login' || to.path === '/registro')) {
+    // Logeado y trata de ir a login/registro
+    next('/perfil');
+  } else {
+    next();
+  }
+});
+
+export default router;

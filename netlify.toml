@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build" # O yarn build
+  publish = "dist"
+
+# Redireccionamiento para el enrutamiento de Vue (modo history)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
