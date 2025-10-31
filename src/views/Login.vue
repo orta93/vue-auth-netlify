@@ -40,7 +40,7 @@ export default {
         await signInWithEmailAndPassword(auth, this.email, this.password);
         
         // Redirige
-        this.$router.push('/perfil'); 
+        this.$router.push('/birthday'); 
 
       } catch (err) {
         // Manejo de errores de Firebase (ej: correo/contraseña inválidos)

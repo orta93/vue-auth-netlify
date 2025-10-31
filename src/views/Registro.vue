@@ -51,7 +51,7 @@ export default {
           createdAt: new Date()
         });
         
-        this.$router.push('/perfil');
+        this.$router.push('/birthday');
 
       } catch (err) {
         this.error = 'Error de registro: ' + err.message;

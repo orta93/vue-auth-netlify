@@ -36,6 +36,7 @@ export default {
   mounted() {
     const user = auth.currentUser;
     if (user) {
+      // this.checkBirthdayRedirect();
       this.fetchUserData(user.uid, user.email);
     } 
   },

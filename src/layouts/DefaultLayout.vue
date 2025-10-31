@@ -12,6 +12,7 @@
         
         <span v-else>
           <router-link to="/perfil">Perfil</router-link>
+          <router-link to="/birthday">Birthday</router-link>
           <button @click="handleLogout" class="logout-btn">Salir</button>
         </span>
       </nav>
@@ -87,6 +88,6 @@ export default {
   color: #42b983;
 }
 .content {
-  padding: 20px; /* Espacio para el contenido */
+  /* padding: 20px;*/
 }
 </style>

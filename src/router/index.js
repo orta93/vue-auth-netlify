@@ -7,6 +7,7 @@ import HomeView from '@/views/HomeView.vue';
 import Registro from '../views/Registro.vue';
 import Login from '../views/Login.vue';
 import Perfil from '@/views/Perfil.vue';
+import Birthday from '@/views/Birthday.vue';
 
 Vue.use(VueRouter);
 
@@ -30,20 +31,20 @@ const routes = [
         name: 'Login',
         component: Login
       },
-    ]
-  },
-  {
-    path: '/perfil',
-    component: DefaultLayout,
-    meta: { requiresAuth: true },
-    children: [
       {
         path: '/perfil',
-        name: 'Perfil',
+        component: DefaultLayout,
+        meta: { requiresAuth: true },
         component: Perfil
       },
+      {
+        path: '/birthday',
+        name: 'Birthday',
+        meta: { requiresAuth: true },
+        component: Birthday
+      },
     ]
-  }
+  },
 ];
 
 const router = new VueRouter({
