@@ -19,6 +19,19 @@
         — Te ama, Oscar
       </div>
     </div>
+
+    <iframe
+        class="spotify"
+        data-testid="embed-iframe"
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/4D7BCuvgdJlYvlX5WlN54t?utm_source=generator&theme=0"
+        width="100%"
+        height="152"
+        frameBorder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+    ></iframe>
   </div>
 </template>
 
@@ -48,6 +61,7 @@ export default {
 /* Estilos del contenedor */
 .birthday-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 80vh;
@@ -138,5 +152,10 @@ export default {
 @keyframes explode {
   0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 #fff; }
   100% { transform: scale(10); opacity: 0; box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0); }
+}
+
+.spotify {
+    max-width: 90vw;
+    margin: 20px auto;
 }
 </style>

@@ -24,6 +24,7 @@ import { signOut } from 'firebase/auth';
 import { doc, getDoc } from "firebase/firestore"; 
 
 import { auth, db } from '@/firebase/init'; // Servicios de Firebase inicializados
+import moment from 'moment';
 
 export default {
   name: 'Perfil',
@@ -41,6 +42,16 @@ export default {
     } 
   },
   methods: {
+    /* checkBirthdayRedirect() {
+      // Formato M/D para verificar Mes (10) y Día (31)
+      const today = moment().format('M/D'); 
+      const targetDate = '10/31'; // 31 de Octubre
+      
+      if (today === targetDate) {
+        // Redirigir si es 31 de octubre
+        this.$router.push('/birthday');
+      }
+    }, */
     // 🔑 FUNCIÓN CORREGIDA: Lectura de datos con Firestore V9
     async fetchUserData(uid, email) {
       this.cargandoDatos = true;
