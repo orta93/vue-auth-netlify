@@ -8,6 +8,7 @@ import Registro from '../views/Registro.vue';
 import Login from '../views/Login.vue';
 import Perfil from '@/views/Perfil.vue';
 import Birthday from '@/views/Birthday.vue';
+import Book from '@/views/Book.vue';
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,12 @@ const routes = [
         meta: { requiresAuth: true },
         component: Birthday
       },
+      {
+        path: '/book',
+        name: 'Book',
+        meta: { requiresAuth: true },
+        component: Book,
+      }
     ]
   },
 ];

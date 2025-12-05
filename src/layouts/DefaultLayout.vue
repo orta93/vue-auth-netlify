@@ -13,6 +13,7 @@
         <span v-else>
           <router-link to="/perfil">Perfil</router-link>
           <router-link to="/birthday">Birthday</router-link>
+          <router-link to="/book">Libro</router-link>
           <button @click="handleLogout" class="logout-btn">Salir</button>
         </span>
       </nav>
